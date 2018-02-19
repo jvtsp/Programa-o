@@ -63,16 +63,16 @@ read -p "IP desejado: " IP
         if [ -z $IP ]; then
                 echo "Nenhum IP digitado" && ip;
         else
-echo $IP | grep -E '^(((([2]([5][0-5]|[0-4][0-9])|[0-9][0-9])|[0-9])\.)|(1[0-9][0-9]\.)){3}((([2]([5][0-5]|[0-4][0-9])|[0-9][0-9])|[0-9])|[1][0-9][0-9])$' && echo -e "IP Válido" && broadcast || echo -e "IP Inválido" && ip
+echo $IP | grep -E '^(((([2]([5][0-5]|[0-4][0-9])|[0-9][0-9])|[0-9])\.)|(1[0-9][0-9]\.)){3}((([2]([5][0-5]|[0-4][0-9])|[0-9][0-9])|[0-9])|[1][0-9][0-9])$' && echo -e "IP Válido" && mascara || echo -e "IP Inválido" && ip
         fi
 }
-broadcast(){
-read -p "Digite o Broadcast desejado " BROAD
+mascara(){
+read -p "Digite a máscara desejado " BROAD
         if [ -z $BROAD ]; then
-                echo "Nenhum dado recebido" && Sleep 2 && clear && broadcast ;
+                echo "Nenhum dado recebido" && Sleep 2 && clear && mascara ;
         else
                 grep $BROAD /home/vagrant/trabalho/Broadcast.txt  && echo -e "Castrato finalizado"  && criar   || \
-                echo -e "Invalido" && broadcast ;
+                echo -e "Invalido" && mascara ;
         fi
 }
 criar(){
@@ -82,9 +82,9 @@ read -p "Qual nome Arquivo?" ARQUIVO
         else
         touch $ARQUIVO.txt;
                 if [ $FIXO == 1 ];then
-                echo $NOME,$DATA,$EMAIL,$RG,\($DDD\)$NUME,$CPF,$BROAD >> $ARQUIVO.txt
+                echo $NOME,$DATA,$EMAIL,$IP,$RG,\($DDD\)$NUME,$CPF,$BROAD >> $ARQUIVO.txt
                 else
-                echo $NOME,$DATA,$EMAIL,$RG,\($DDD\)$NUME1,$CPF,$BROAD >> $ARQUIVO.txt
+                echo $NOME,$DATA,$EMAIL,$IP,$RG,\($DDD\)$NUME1,$CPF,$BROAD >> $ARQUIVO.txt
                 fi
         exit
         fi
